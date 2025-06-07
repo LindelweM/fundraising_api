@@ -73,4 +73,5 @@ Returns donation aggregates:
     Average donation amount (completed only)
 
 📬 Contact
-Built by Lindelwe Myeza Reach out on LinkedIn or via email if you'd like to chat more about the project!
+Built by Lindelwe Myeza 
+Reach out on LinkedIn or via email if you'd like to chat more about the project!
