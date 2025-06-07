@@ -33,6 +33,7 @@ fundraising_api/src/
 ```bash
 git clone git@github.com:LindelweM/fundraising_api.git
 cd fundraising_api
+```
 
 ### 2. Install dependencies
 
@@ -41,7 +42,7 @@ npm install
 ### 3. Configure environment variables
 Create a .env file:
 
-DB_NAME=your_db_name
+DB_NAME=fundraiser_db
 DB_USER=your_db_user
 DB_PASSWORD=yourpassword
 DB_HOST=localhost
@@ -50,14 +51,21 @@ DB_PORT=5432
 ### 4. Create the database
 Create a PostgreSQL database with a name for the api:
 
-psql -U postgres -c "CREATE DATABASE (use_the_name_created_above);"
+```bash
+psql -U postgres -c "CREATE DATABASE fundraiser_db;"
+```
 
 ### 5. Seed the database
 
+```bash
 npm run seed
+```
 
 ### 6. Start the API
+
+```bash
 npm start
+```
 
 API Endpoints
 GET /api/v1/donations
@@ -66,12 +74,13 @@ Returns a paginated list of completed donations.
 GET /api/v1/donations/summary
 Returns donation aggregates:
 
-    Total donation amount per campaign
+    * Total donation amount per campaign
 
-    Total donation amount per currency
+    * Total donation amount per currency
 
-    Average donation amount (completed only)
+    * Average donation amount (completed only)
 
 📬 Contact
 Built by Lindelwe Myeza 
-Reach out on LinkedIn or via email if you'd like to chat more about the project!
+Reach out on [LinkedIn](https://www.linkedin.com/in/lindelwe-myeza/) or via [Email](mailto:lindelwenpmyeza@gmail.com) if you'd like to chat more about the project!
+
