@@ -44,9 +44,9 @@ Create a .env file:
 
 DB_NAME=fundraiser_db
 DB_USER=your_db_user
-DB_PASSWORD=yourpassword
-DB_HOST=localhost
-DB_PORT=5432
+DB_PASSWORD=your_password
+DB_HOST=your_host
+DB_PORT=your_port
 
 ### 4. Create the database
 Create a PostgreSQL database with a name for the api:
@@ -71,6 +71,31 @@ API Endpoints
 GET /api/v1/donations
 Returns a paginated list of completed donations.
 
+Basic Request (defaults to page 1, limit 10):
+```bash
+curl -X GET "http://localhost:3000/api/v1/donations"
+```
+
+With Pagination:
+```bash
+curl -X GET "http://localhost:3000/api/v1/donations?page=2&limit=5"
+```
+
+Filter by campaign_id:
+```bash
+curl -X GET "http://localhost:3000/api/v1/donations?campaign_id=3"
+```
+
+Filter by currency:
+```bash
+curl -X GET "http://localhost:3000/api/v1/donations?campaign_id=2&currency=ZAR&page=1&limit=20"
+```
+
+Combined filters:
+```bash
+curl -X GET "http://localhost:3000/api/v1/donations?campaign_id=2&currency=ZAR&page=1&limit=20"
+```
+
 GET /api/v1/donations/summary
 Returns donation aggregates:
 
@@ -79,6 +104,11 @@ Returns donation aggregates:
     * Total donation amount per currency
 
     * Average donation amount (completed only)
+
+```bash
+curl -X GET "http://localhost:3000/api/v1/donations/summary"
+```
+
 
 📬 Contact
 Built by Lindelwe Myeza 
