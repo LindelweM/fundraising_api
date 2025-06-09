@@ -40,13 +40,13 @@ cd fundraising_api
 npm install
 
 ### 3. Configure environment variables
-Create a .env file:
+Create a .env file:<br>
 
-DB_NAME=fundraiser_db
-DB_USER=your_db_user
-DB_PASSWORD=your_password
-DB_HOST=your_host
-DB_PORT=your_port
+DB_NAME=fundraiser_db <br>
+DB_USER=your_db_user<br>
+DB_PASSWORD=your_password<br>
+DB_HOST=your_host<br>
+DB_PORT=your_port<br>
 
 ### 4. Create the database
 Create a PostgreSQL database with a name for the api:
