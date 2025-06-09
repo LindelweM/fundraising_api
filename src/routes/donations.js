@@ -59,12 +59,19 @@ router.get('/', async (req, res) => {
 router.get('/summary', async (req, res) => {
   try {
     const Sequelize = require('sequelize');
-    const { Donation } = require('../models');
+    const { Donation, Campaign } = require('../models');
 
     const totalByCampaign = await Donation.findAll({
       where: { status: 'completed' },
-      attributes: ['campaign_id', [Sequelize.fn('SUM', Sequelize.col('amount')), 'total']],
-      group: ['campaign_id']
+      attributes: [
+        'campaign_id',
+        [Sequelize.fn('SUM', Sequelize.col('amount')), 'total']
+      ],
+      include: [{
+        model: Campaign,
+        attributes: ['campaign_id', 'campaign_name']
+      }],
+      group: ['Donation.campaign_id', 'Campaign.campaign_id', 'Campaign.campaign_name']
     });
 
     const totalByCurrency = await Donation.findAll({
@@ -73,15 +80,26 @@ router.get('/summary', async (req, res) => {
       group: ['currency']
     });
 
-    const avgDonation = await Donation.findOne({
+    const avgDonationResult = await Donation.findAll({
       where: { status: 'completed' },
-      attributes: [[Sequelize.fn('AVG', Sequelize.col('amount')), 'average']]
+      attributes: [[Sequelize.fn('AVG', Sequelize.col('amount')), 'average']],
+      raw: true
     });
 
+    const avgDonation = avgDonationResult[0]?.average || 0;
+
+
     return res.status(200).json({
-      total_by_campaign: totalByCampaign,
-      total_by_currency: totalByCurrency,
-      average_donation: parseFloat(avgDonation.dataValues.average || 0).toFixed(2)
+      total_by_campaign: totalByCampaign.map(item => ({
+        campaign_id: item.campaign_id,
+        campaign_name: item.Campaign?.campaign_name || 'Unknown',
+        total_amount: parseFloat(item.getDataValue('total'))
+      })),
+      total_by_currency: totalByCurrency.map(item => ({
+        currency: item.currency,
+        total_amount: parseFloat(item.getDataValue('total'))
+      })),
+      average_donation: parseFloat(avgDonation).toFixed(2)
     });
 
   } catch (error) {
@@ -89,5 +107,9 @@ router.get('/summary', async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+
+
 
 module.exports = router;

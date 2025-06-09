@@ -3,7 +3,7 @@ SELECT cmp.campaign_id, cmp.campaign_name, SUM(amount) AS total_amount
 FROM donations
 INNER JOIN campaigns AS cmp ON cmp.campaign_id = donations.campaign_id
 WHERE status = 'completed'
-GROUP BY cmp.campaign_id;
+GROUP BY cmp.campaign_id, cmp.campaign_name;
 
 -- Total donation amount per currency
 SELECT currency, SUM(amount) AS total_amount
@@ -15,7 +15,7 @@ GROUP BY currency;
 SELECT cmp.campaign_id, cmp.campaign_name, COUNT(DISTINCT donor_id) AS unique_donors
 FROM donations
 INNER JOIN campaigns AS cmp ON cmp.campaign_id = donations.campaign_id
-GROUP BY cmp.campaign_id;
+GROUP BY cmp.campaign_id, cmp.campaign_name;
 
 -- Average donation amount (completed only)
 SELECT AVG(amount) AS average_donation
@@ -24,10 +24,10 @@ WHERE status = 'completed';
 
 -- Monthly totals per currency for a given year
 SELECT 
-    DATE_TRUNC('month', donation_date) AS month,
+    FORMAT(donation_date, 'yyyy-MM') AS [month],
     currency,
     SUM(amount) AS total
 FROM donations
-WHERE status = 'completed' AND EXTRACT(YEAR FROM donation_date) = 2024
-GROUP BY month, currency
-ORDER BY month, currency;
+WHERE status = 'completed' AND YEAR(donation_date) = 2024
+GROUP BY FORMAT(donation_date, 'yyyy-MM'), currency
+ORDER BY [month], currency;

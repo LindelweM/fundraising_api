@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { sequelize } = require('./models');
+const sequelize = require('./config/database');
 const donationRoutes = require('./routes/donations');
 
 app.use(express.json());
