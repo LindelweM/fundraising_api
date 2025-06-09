@@ -14,15 +14,15 @@ This is a Node.js + Express API. It connects to a PostgreSQL database, stores do
 ---
 
 ## 📁 Project Structure
-fundraising_api/src/
-│
-├── app.js → API entry point
-├── .env → Environment variables
-├── config/database.js → Sequelize DB config
-├── models/ → Donor, Campaign, Donation models
-├── routes/donations.js → Donation-related routes
-├── seeds/seed.js → Seeder script with sample data
-└── package.json
+fundraising_api/src/<br>
+│<br>
+├── app.js → API entry point<br>
+├── .env → Environment variables<br>
+├── config/database.js → Sequelize DB config<br>
+├── models/ → Donor, Campaign, Donation models<br>
+├── routes/donations.js → Donation-related routes<br>
+├── seeds/seed.js → Seeder script with sample data<br>
+└── package.json<br>
 
 ---
 
@@ -110,7 +110,7 @@ curl -X GET "http://localhost:3000/api/v1/donations/summary"
 ```
 
 
-📬 Contact
+📬 Contact<br>
 Built by Lindelwe Myeza 
 Reach out on [LinkedIn](https://www.linkedin.com/in/lindelwe-myeza/) or via [Email](mailto:lindelwenpmyeza@gmail.com) if you'd like to chat more about the project!
 
